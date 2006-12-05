@@ -1,11 +1,11 @@
 <?php
 // UTF-8 functions
-require_once dirname(__FILE__) .'/includes/utf8/utf8.php';
+require_once(dirname(__FILE__) .'/includes/utf8.php');
 
 // Translation
-require_once dirname(__FILE__) .'/includes/php-gettext/gettext.inc';
+require_once(dirname(__FILE__) .'/includes/php-gettext/gettext.inc');
 $domain = 'messages';
-T_setlocale(LC_ALL, $locale);
+T_setlocale(LC_MESSAGES, $locale);
 T_bindtextdomain($domain, dirname(__FILE__) .'/locales');
 T_bind_textdomain_codeset($domain, 'UTF-8');
 T_textdomain($domain);
@@ -157,3 +157,4 @@ function message_die($msg_code, $msg_text = '', $msg_title = '', $err_line = '',
 	echo "<html>\n<body>\n". $msg_title ."\n<br /><br />\n". $msg_text ."</body>\n</html>";
 	exit;
 }
+?>

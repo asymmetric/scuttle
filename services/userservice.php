@@ -1,25 +1,24 @@
 <?php
 class UserService {
-  var $db;
+    var $db;
 
-  function &getInstance(&$db) {
-    static $instance;
-    if (!isset($instance)) {
-      $instance = new UserService($db);
+    function &getInstance(&$db) {
+        static $instance;
+        if (!isset($instance))
+            $instance =& new UserService($db);
+        return $instance;
     }
-    return $instance;
-  }
 
-  var $fields = array(
-    'primary'   => 'uId',
-    'username'  => 'username',
-    'password'  => 'password'
-  );
-  var $profileurl;
-  var $tablename;
-  var $sessionkey;
-  var $cookiekey;
-  var $cookietime = 1209600; // 2 weeks
+    var $fields = array(
+        'primary'   =>  'uId',
+        'username'  =>  'username',
+        'password'  =>  'password'
+    );
+    var $profileurl;
+    var $tablename;
+    var $sessionkey;
+    var $cookiekey;
+    var $cookietime = 1209600; // 2 weeks
 
     function UserService(&$db) {
         $this->db =& $db;
@@ -64,6 +63,8 @@ class UserService {
     }
 
     function _randompassword() {
+        $seed = (integer) md5(microtime());
+        mt_srand($seed);
         $password = mt_rand(1, 99999999);
         $password = substr(md5($password), mt_rand(0, 19), mt_rand(6, 12));
         return $password;
@@ -144,7 +145,7 @@ class UserService {
         return false;
     }
 
-    function login($username, $password, $remember = FALSE, $path = '/') {
+    function login($username, $password, $remember = FALSE) {
         $password = $this->sanitisePassword($password);
         $query = 'SELECT '. $this->getFieldName('primary') .' FROM '. $this->getTableName() .' WHERE '. $this->getFieldName('username') .' = "'. $this->db->sql_escape($username) .'" AND '. $this->getFieldName('password') .' = "'. $this->db->sql_escape($password) .'"';
 
@@ -157,7 +158,7 @@ class UserService {
             $id = $_SESSION[$this->getSessionKey()] = $row[$this->getFieldName('primary')];
             if ($remember) {
                 $cookie = $id .':'. md5($username.$password);
-                setcookie($this->cookiekey, $cookie, time() + $this->cookietime, $path);
+                setcookie($this->cookiekey, $cookie, time() + $this->cookietime);
             }
             return true;
         } else {
@@ -165,8 +166,8 @@ class UserService {
         }
     }
 
-    function logout($path = '/') {
-        @setcookie($this->cookiekey, NULL, time() - 1, $path);
+    function logout() {
+        @setcookie($this->cookiekey, NULL, time() - 1);
         unset($_COOKIE[$this->cookiekey]);
         session_unset();
         $this->getCurrentUser(TRUE, false);
@@ -334,8 +335,8 @@ class UserService {
     }
 
     function isValidEmail($email) {
-        if (preg_match("/^((?:(?:(?:\w[\.\-\+_]?)*)\w)+)\@((?:(?:(?:\w[\.\-_]?){0,62})\w)+)\.(\w{2,6})$/i", $email) > 0) {
-            list($emailUser, $emailDomain) = explode("@", $email);
+        if (eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,6})$", $email)) {
+            list($emailUser, $emailDomain) = split("@", $email);
 
             // Check if the email domain has a DNS record
             if ($this->_checkdns($emailDomain)) {
@@ -358,3 +359,4 @@ class UserService {
     function getCookieKey()       { return $this->cookiekey; }
     function setCookieKey($value) { $this->cookiekey = $value; }
 }
+?>

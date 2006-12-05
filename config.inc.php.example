@@ -2,7 +2,7 @@
 ######################################################################
 # SCUTTLE: Online social bookmarks manager
 ######################################################################
-# Copyright (c) 2005 - 2010 Scuttle project
+# Copyright (C) 2005 - 2006 Scuttle project
 # http://sourceforge.net/projects/scuttle/
 # http://scuttle.org/
 #
@@ -25,7 +25,7 @@
 # dbname:   Database name
 ######################################################################
 
-$dbtype = 'mysql';
+$dbtype = 'mysql4';
 $dbhost = '127.0.0.1';
 $dbport = '3306';
 $dbuser = 'username';
@@ -116,4 +116,5 @@ $filetypes          = array(
                         );
 $reservedusers      = array('all', 'watchlist');
 
-include_once 'debug.inc.php';
+include_once('debug.inc.php');
+?>

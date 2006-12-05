@@ -17,6 +17,12 @@ switch ($row['bStatus']) {
 }
 ?>
 
+<script type="text/javascript">
+window.onload = function() {
+    document.getElementById("address").focus();
+}
+</script>
+
 <form action="<?php echo $formaction; ?>" method="post">
 <table>
 <tr>
@@ -54,24 +60,27 @@ switch ($row['bStatus']) {
     <td></td>
     <td>
         <input type="submit" name="submitted" value="<?php echo $btnsubmit; ?>" />
-        <?php if ($showdelete): ?>
-          <input type="submit" name="delete" value="<?php echo T_('Delete Bookmark'); ?>" />
-        <?php endif; ?>
-        <?php if ($popup): ?>
-          <input type="hidden" name="popup" value="1" />
-        <?php elseif ($referrer): ?>
-          <input type="hidden" name="referrer" value="<?php echo $referrer; ?>" />
-        <?php endif; ?>
+        <?php
+        if ($showdelete) {
+        ?>
+        <input type="submit" name="delete" value="<?php echo T_('Delete Bookmark'); ?>" />
+        <?php
+        }
+        if ($popup) {
+        ?>
+        <input type="hidden" name="popup" value="1" />
+        <?php
+        } elseif ($referrer) {
+        ?>
+        <input type="hidden" name="referrer" value="<?php echo $referrer; ?>" />
+        <?php
+        }
+        ?>
     </td>
     <td></td>
 </tr>
 </table>
 </form>
-<script type="text/javascript">
-$(function() {
-  $("#address").focus();
-});
-</script>
 
 <?php
 // Dynamic tag selection

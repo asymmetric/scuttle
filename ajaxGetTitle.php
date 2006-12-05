@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
-Copyright (c) 2005 - 2010 Scuttle project
+Copyright (C) 2005 - 2006 Scuttle project
 http://sourceforge.net/projects/scuttle/
 http://scuttle.org/
 
@@ -19,10 +19,11 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ***************************************************************************/
 
-header('Content-Type: text/plain; charset=UTF-8');
-header('Last-Modified: '. gmdate("D, d M Y H:i:s") .' GMT');
-header('Cache-Control: no-cache, must-revalidate');
-require_once 'header.inc.php';
+header('Content-Type: text/xml; charset=UTF-8');
+header("Last-Modified: ". gmdate("D, d M Y H:i:s") ." GMT");
+header("Cache-Control: no-cache, must-revalidate");
+
+require_once('header.inc.php');
 
 function getTitle($url) {
     $fd = @fopen($url, 'r');
@@ -39,7 +40,7 @@ function getTitle($url) {
         $encoding = strtoupper($matches[1][0]);
 
         // Convert to UTF-8 from the original encoding
-        if (function_exists('mb_convert_encoding')) {
+        if (function_exists('mb_convert_encoding') {
             $title = @mb_convert_encoding($title, 'UTF-8', $encoding);
         }
 
@@ -57,4 +58,9 @@ function getTitle($url) {
         return false;
     }
 }
-echo getTitle($_GET['url']);
+echo '<?xml version="1.0" encoding="utf-8"?>';
+?>
+<response>
+  <method>getTitle</method>
+  <result><?php echo getTitle($_GET['url']); ?></result>
+</response>

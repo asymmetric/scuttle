@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
-Copyright (c) 2005 - 2006 Scuttle project
+Copyright (C) 2005 - 2006 Scuttle project
 http://sourceforge.net/projects/scuttle/
 http://scuttle.org/
 

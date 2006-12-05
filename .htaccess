@@ -1,12 +1,7 @@
-# Rewrite clean URLs onto real files
-<IfModule mod_rewrite.c>
-  <IfDefine APACHE2>
-    AcceptPathInfo On
-  </IfDefine>
-  RewriteEngine On
-  RewriteBase /
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME}.php -f
-  RewriteRule ^([^/]+)/?(.*) $1.php/$2 [L]
-</IfModule>
+Options +FollowSymlinks
+AcceptPathInfo On
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/?(.*)      $1.php/$2       [L]

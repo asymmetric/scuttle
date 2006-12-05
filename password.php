@@ -1,8 +1,7 @@
-<?php
+<?
 /***************************************************************************
-Copyright (c) 2005 Scuttle project
-http://sourceforge.net/projects/scuttle/
-http://scuttle.org/
+Copyright (C) 2005 Scuttle project
+https://sourceforge.net/projects/scuttle/
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

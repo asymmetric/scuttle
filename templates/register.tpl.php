@@ -1,4 +1,12 @@
-<?php $this->includeTemplate($GLOBALS['top_include']); ?> 
+<?php
+$this->includeTemplate($GLOBALS['top_include']);
+?>
+
+<script type="text/javascript">
+window.onload = function() {
+    document.getElementById("username").focus();
+}
+</script>
 
 <p><?php echo sprintf(T_('Sign up here to create a free %s account. All the information requested below is required'), $GLOBALS['sitename']); ?>.</p>
 
@@ -6,7 +14,7 @@
 <table>
 <tr>
     <th align="left"><label for="username"><?php echo T_('Username'); ?></label></th>
-    <td><input type="text" id="username" name="username" size="20" class="required" /></td>
+    <td><input type="text" id="username" name="username" size="20" class="required" onkeyup="isAvailable(this, '')" /></td>
     <td id="availability"></td>
 </tr>
 <tr>
@@ -26,26 +34,7 @@
 </tr>
 </table>
 </form>
-<script type="text/javascript">
-$(function() {
-  $("#username").focus()
-                .keydown(function() {
-                  clearTimeout(self.searching);
-                  self.searching = setTimeout(function() {
-                    $.get("<?php echo $GLOBALS['root']; ?>ajaxIsAvailable.php?username=" + $("#username").val(), function(data) {
-                        if (data) {
-                          $("#availability").removeClass()
-                                            .html("<?php echo T_('Available'); ?>");
-                        } else {
-                          $("#availability").removeClass()
-                                            .addClass("not-available")
-                                            .html("<?php echo T_('Not Available'); ?>");
-                        }
-                      }
-                    );
-                  }, 300);
-                });
-});
-</script>
 
-<?php $this->includeTemplate($GLOBALS['bottom_include']); ?>
+<?php
+$this->includeTemplate($GLOBALS['bottom_include']);
+?>

@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
-Copyright (c) 2004 - 2006 Scuttle project
+Copyright (C) 2004 - 2006 Scuttle project
 http://sourceforge.net/projects/scuttle/
 http://scuttle.org/
 
@@ -28,7 +28,7 @@ $tplVars = array();
 $login = false;
 if (isset($_POST['submitted']) && isset($_POST['username']) && isset($_POST['password'])) {
     $posteduser = trim(utf8_strtolower($_POST['username']));
-    $login      = $userservice->login($posteduser, $_POST['password'], ($_POST['keeppass'] == 'yes'), $path); 
+    $login = $userservice->login($posteduser, $_POST['password'], ($_POST['keeppass'] == "yes")); 
     if ($login) {
         if ($_POST['query'])
             header('Location: '. createURL('bookmarks', $posteduser .'?'. $_POST['query']));

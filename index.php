@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
-Copyright (c) 2004 - 2006 Scuttle project
+Copyright (C) 2004 - 2006 Scuttle project
 http://sourceforge.net/projects/scuttle/
 http://scuttle.org/
 
@@ -28,7 +28,7 @@ $cacheservice =& ServiceFactory::getServiceInstance('CacheService');
 $tplvars = array();
 if (isset($_GET['action'])){
     if ($_GET['action'] == "logout") {
-        $userservice->logout($path);
+        $userservice->logout();
         $tplvars['msg'] = T_('You have now logged out');
     }
 }
