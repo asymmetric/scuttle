@@ -42,6 +42,7 @@ if (isset($_REQUEST['dt']) && (trim($_REQUEST['dt']) != ''))
 else
     $dt = NULL;
 
+$replace = true;
 if (isset($_REQUEST['replace']) && (trim($_REQUEST['replace'] == 'no'))
     $replace = false;
 
@@ -73,8 +74,12 @@ if (is_null($url) || is_null($description)) {
     $added = false;
 } else {
 // We're good with info; now insert it!
-    if ($bookmarkservice->bookmarkExists($url, $userservice->getCurrentUserId()))
-        $added = false;
+    if ($bookmarkservice->bookmarkExists($url, $userservice->getCurrentUserId())) {
+        if ($replace)
+            $added = $bookmarkservice->addBookmark($url, $description, $extended, $status, $tags, $dt, true);
+        else
+            $added = false;
+    }
     else
         $added = $bookmarkservice->addBookmark($url, $description, $extended, $status, $tags, $dt, true);
 }
