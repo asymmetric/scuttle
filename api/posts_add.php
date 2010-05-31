@@ -74,9 +74,9 @@ if (is_null($url) || is_null($description)) {
     $added = false;
 } else {
 // We're good with info; now insert it!
-    if ($bookmarkservice->bookmarkExists($url, $userservice->getCurrentUserId())) {
+    if ($bID = $bookmarkservice->bookmarkExists($url, $userservice->getCurrentUserId())) {
         if ($replace)
-            $added = $bookmarkservice->addBookmark($url, $description, $extended, $status, $tags, $dt, true);
+            $added = $bookmarkservice->updateBookmark($bID, $url, $description, $extended, $status, $tags, $dt, true);
         else
             $added = false;
     }
