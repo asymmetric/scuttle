@@ -24,7 +24,7 @@ define('SQL_LAYER', 'mysql');
 class sql_db
 {
 	var $db_connect_id;
-	var $query_result;
+	var $query_result; // boolean
 	var $return_on_error = false;
 	var $transaction = false;
 	var $sql_time = 0;
