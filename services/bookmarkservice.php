@@ -227,7 +227,7 @@ class BookmarkService {
           $privacy = ' AND ((B.bStatus = 0) OR (B.uId = '. $sId .')';
           $watchnames = $userservice->getWatchNames($sId, true);
           foreach($watchnames as $watchuser) {
-              $privacy .= ' OR (U.username = "'. $watchuser .'" AND B.bStatus = 1)'; 
+              $privacy .= ' OR (U.username = "'. $watchuser .'" AND B.bStatus = 1)';
           }
           $privacy .= ')';
       } else {
@@ -398,7 +398,7 @@ class BookmarkService {
           $privacy = ' AND ((B.bStatus = 0) OR (B.uId = '. $sId .')';
           $watchnames = $userservice->getWatchNames($sId, true);
           foreach($watchnames as $watchuser) {
-              $privacy .= ' OR (U.username = "'. $watchuser .'" AND B.bStatus = 1)'; 
+              $privacy .= ' OR (U.username = "'. $watchuser .'" AND B.bStatus = 1)';
           }
           $privacy .= ')';
       } else {

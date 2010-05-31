@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package dbal_mysql
 * @version $Id: mysql.php,v 1.5 2006/02/10 01:30:19 scronide Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -94,7 +94,7 @@ class sql_db
 			case 'commit':
 				$result = @mysql_query('COMMIT', $this->db_connect_id);
 				$this->transaction = false;
-				
+
 				if (!$result)
 				{
 					@mysql_query('ROLLBACK', $this->db_connect_id);
@@ -166,18 +166,18 @@ class sql_db
 		return ($this->query_result) ? $this->query_result : false;
 	}
 
-	function sql_query_limit($query, $total, $offset = 0, $cache_ttl = 0) { 
+	function sql_query_limit($query, $total, $offset = 0, $cache_ttl = 0) {
 		if ($query != '') {
-            $this->query_result = false; 
+            $this->query_result = false;
 
 			// only limit the number of rows if $total is greater than 0
 			if ($total > 0)
     			$query .= "\n LIMIT " . ((!empty($offset)) ? $offset . ', ' . $total : $total);
 
-			return $this->sql_query($query, $cache_ttl); 
-		} else { 
-            return false; 
-		} 
+			return $this->sql_query($query, $cache_ttl);
+		} else {
+            return false;
+		}
 	}
 
 	// Idea for this from Ikonboard
@@ -291,7 +291,7 @@ class sql_db
 			}
 			return $result;
 		}
-		
+
 		return false;
 	}
 
@@ -370,9 +370,9 @@ class sql_db
 			return @mysql_real_escape_string($msg, $this->db_connect_id);
 		} else {
 			return mysql_escape_string($msg);
-		}		
+		}
 	}
-	
+
 	function sql_error($sql = '')
 	{
 		if (!$this->return_on_error)
@@ -386,7 +386,7 @@ class sql_db
 			{
 				$this->sql_transaction('rollback');
 			}
-			
+
 			trigger_error($message, E_USER_ERROR);
 		}
 
@@ -463,7 +463,7 @@ class sql_db
 							{
 								$html_table = TRUE;
 								$html_hold .= '<table class="bg" width="100%" cellspacing="1" cellpadding="4" border="0" align="center"><tr>';
-								
+
 								foreach (array_keys($row) as $val)
 								{
 									$html_hold .= '<th nowrap="nowrap">' . (($val) ? ucwords(str_replace('_', ' ', $val)) : '&nbsp;') . '</th>';
