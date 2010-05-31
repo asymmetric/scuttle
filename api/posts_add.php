@@ -42,6 +42,9 @@ if (isset($_REQUEST['dt']) && (trim($_REQUEST['dt']) != ''))
 else
     $dt = NULL;
 
+if (isset($_REQUEST['replace']) && (trim($_REQUEST['replace'] == 'no'))
+    $replace = false;
+
 $status = 0;
 if (isset($_REQUEST['status'])) {
     $status_str = trim($_REQUEST['status']);
