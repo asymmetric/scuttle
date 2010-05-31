@@ -295,6 +295,9 @@ class sql_db
 		return false;
 	}
 
+  /**
+   * If $rownum < 0 fetch the current row, otherwise interpet it as a row pointer
+   **/
 	function sql_fetchfield($field, $rownum = -1, $query_id = false)
 	{
 		if (!$query_id)
