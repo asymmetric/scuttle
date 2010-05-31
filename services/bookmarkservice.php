@@ -80,6 +80,9 @@ class BookmarkService {
           return ($bookmark['uId'] == $userid);
   }
 
+  /**
+   * Return the bID off the existing bookmark, or FALSE
+   */
   function bookmarkExists($address = false, $uid = NULL) {
       if (!$address) {
           return;
@@ -99,7 +102,12 @@ class BookmarkService {
       if (!($dbresult = & $this->db->sql_query($sql))) {
           message_die(GENERAL_ERROR, 'Could not get vars', '', __LINE__, __FILE__, $sql, $this->db);
       }
-      return ($this->db->sql_fetchfield(0, 0) > 0);
+
+      if (($retval = $this->db->sql_fetchfield(0, 0) > 0);
+          return $retval;
+      else
+          return FALSE;
+
   }
 
   // Adds a bookmark to the database.
